@@ -500,17 +500,104 @@
     return false;
   });
 
+  // ─── WhatsApp Web — Live Message Observer ────────────────────────────────
+  // MutationObserver watches for new message bubbles arriving in real time.
+  // Debounced 1.5s so we batch rapid incoming messages into one scan.
+
+  function installWhatsAppObserver() {
+    if (!window.location.hostname.includes('web.whatsapp.com')) return;
+
+    let debounceTimer = null;
+    let lastScannedText = '';
+
+    const observer = new MutationObserver(() => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        const waData = extractWhatsAppMessages();
+        if (!waData || waData.text === lastScannedText) return;
+        lastScannedText = waData.text;
+
+        // Run local gate immediately for instant feedback
+        const localResult = window.__chetanaLocalGate
+          ? window.__chetanaLocalGate(waData.text)
+          : null;
+
+        if (localResult && localResult.signals.length > 0) {
+          // Show inline warning banner in the chat
+          showWhatsAppWarning(localResult);
+        }
+
+        // Also ask background to do full scan
+        chrome.runtime.sendMessage({
+          action: 'scanText',
+          text: waData.text,
+          url: window.location.href,
+          source: 'whatsapp-web',
+        });
+      }, 1500);
+    });
+
+    // Watch the message list container
+    const tryObserve = () => {
+      const pane = document.querySelector('#main') || document.querySelector('[data-tab="8"]');
+      if (pane) {
+        observer.observe(pane, { childList: true, subtree: true });
+      } else {
+        setTimeout(tryObserve, 2000); // WhatsApp loads lazily
+      }
+    };
+    tryObserve();
+  }
+
+  function showWhatsAppWarning(result) {
+    const existing = document.getElementById('chetana-wa-warning');
+    if (existing) existing.remove();
+
+    const banner = document.createElement('div');
+    banner.id = 'chetana-wa-warning';
+    banner.style.cssText = `
+      position: fixed; top: 60px; right: 12px; z-index: 9999;
+      background: #1a1a2e; border: 1px solid #ef4444; border-radius: 10px;
+      padding: 10px 14px; max-width: 280px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      font-family: system-ui, sans-serif; font-size: 12px; color: #e2e8f0;
+    `;
+    const topSignals = result.signals.slice(0, 2).join(' · ');
+    banner.innerHTML = `
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="font-size:16px;">🛡️</span>
+        <strong style="color:#ef4444;font-size:13px;">Chetana: Scam Risk Detected</strong>
+        <button id="chetana-wa-dismiss" style="margin-left:auto;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:14px;">✕</button>
+      </div>
+      <div style="color:#94a3b8;line-height:1.5;">${topSignals}</div>
+      <div style="margin-top:6px;color:#f97316;font-size:11px;">Do not share OTP, UPI PIN, or personal details.</div>
+    `;
+
+    document.body.appendChild(banner);
+    document.getElementById('chetana-wa-dismiss')?.addEventListener('click', () => banner.remove());
+    setTimeout(() => banner?.remove(), 15000);
+  }
+
+  // Expose local gate to content script context for WA observer
+  // (simplified — just keyword check for instant response)
+  window.__chetanaLocalGate = (text) => {
+    const signals = [];
+    const t = text.toLowerCase();
+    if (/upi.{0,20}collect|kyc.{0,20}expir|aadhaar.{0,20}updat/.test(t)) signals.push('UPI/KYC urgency');
+    if (/digital.{0,10}arrest|cbi.{0,20}notice|arrest.{0,10}warrant/.test(t)) signals.push('Digital arrest scam');
+    if (/(?:share|send|give).{0,20}otp|one.time.pass/.test(t)) signals.push('OTP solicitation');
+    if (/guaranteed.{0,15}return|daily.{0,10}profit|task.{0,15}earn/.test(t)) signals.push('Investment/task scam');
+    if (/kbc.{0,20}(?:winner|prize)|congratulation.{0,20}won/.test(t)) signals.push('Lottery scam');
+    if (/(?:bit\.ly|tinyurl).*(?:bank|kyc|upi|pay|urgent)/.test(t)) signals.push('Suspicious link');
+    return { signals, trustScore: signals.length > 0 ? Math.max(20, 72 - signals.length * 20) : 80 };
+  };
+
   // --- Init ---
 
-  // Install submit guard (reads settings from storage)
   chrome.storage?.local?.get('chetana_settings', (result) => {
     const s = result?.chetana_settings || {};
-    if (s.submitGuard !== false) {
-      installSubmitGuard();
-    }
-    if (s.linkHoverTooltips !== false) {
-      installLinkHoverTooltips();
-    }
+    if (s.submitGuard !== false) installSubmitGuard();
+    if (s.linkHoverTooltips !== false) installLinkHoverTooltips();
+    installWhatsAppObserver(); // always on for WhatsApp Web
   });
 
 })();

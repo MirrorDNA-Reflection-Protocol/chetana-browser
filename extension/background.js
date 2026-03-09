@@ -211,6 +211,47 @@ async function checkBackendHealth() {
   return backendOnline;
 }
 
+const CLOUD_API = 'https://chetana.activemirror.ai/api/scan/full';
+let cloudAvailable = true;
+
+async function analyzeWithCloud(payload) {
+  if (!cloudAvailable) return null;
+  try {
+    // Map extension snapshot to Chetana API format
+    const body = {
+      text: [payload.visibleText, payload.title, payload.url].filter(Boolean).join('\n').slice(0, 3000),
+      lang: 'en',
+      context: payload.messaging?.source || 'browser',
+    };
+    const resp = await fetch(CLOUD_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(12000)
+    });
+    if (!resp.ok) { cloudAvailable = false; return null; }
+    const data = await resp.json();
+    // Normalize to extension format
+    const score = data.risk_score !== undefined ? (100 - data.risk_score) : 50;
+    return {
+      trustScore: score,
+      riskLevel: getRiskLevel(score),
+      signals: data.why_flagged || [],
+      recommendations: data.action_eligibility === 'WARN'
+        ? ['Do not share personal details', 'Verify through official channels', 'Report to 1930 or cybercrime.gov.in']
+        : [],
+      verdict: data.verdict,
+      source: 'cloud',
+    };
+  } catch {
+    cloudAvailable = false;
+    return null;
+  }
+}
+
+// Restore cloud availability periodically
+setInterval(() => { cloudAvailable = true; }, 5 * 60 * 1000);
+
 async function analyzeWithBackend(payload) {
   if (!backendOnline) {
     await checkBackendHealth();
@@ -272,12 +313,11 @@ async function scanTab(tabId) {
     cachedResult = await getCachedDomain(hostname);
   } catch {}
 
-  let result = cachedResult || await analyzeWithBackend(snapshot);
-
-  // Fall back to local gate if backend is offline
-  if (!result) {
-    result = localGateCheck(snapshot);
-  }
+  // Fallback chain: cache → Ollama → cloud API → local gate
+  let result = cachedResult
+    || await analyzeWithBackend(snapshot)
+    || await analyzeWithCloud(snapshot)
+    || localGateCheck(snapshot);
 
   const assessment = {
     url: snapshot.url,
@@ -358,6 +398,68 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
   }
 });
 
+// ─── Context Menu — "Check with Chetana" ─────────────────────────────────
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: 'chetana-check-selection',
+    title: 'Check with Chetana 🛡',
+    contexts: ['selection', 'link'],
+  });
+  chrome.contextMenus.create({
+    id: 'chetana-check-page',
+    title: 'Check this page — Chetana 🛡',
+    contexts: ['page'],
+  });
+});
+
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+  if (!tab?.id) return;
+
+  if (info.menuItemId === 'chetana-check-selection' || info.menuItemId === 'chetana-check-page') {
+    const text = info.selectionText || info.linkUrl || '';
+    const url = info.pageUrl || tab.url || '';
+
+    // Build a minimal snapshot from the selected text / link
+    const snapshot = {
+      url,
+      title: tab.title || '',
+      visibleText: text,
+      pageText: text,
+      signals: {},
+      messaging: text ? { source: 'context-menu', text, messageCount: 1 } : null,
+    };
+
+    const result = await analyzeWithBackend(snapshot)
+      || await analyzeWithCloud(snapshot)
+      || localGateCheck(snapshot);
+
+    const assessment = {
+      url,
+      title: tab.title || '',
+      trustScore: result.trustScore ?? 50,
+      riskLevel: result.riskLevel ?? getRiskLevel(result.trustScore ?? 50),
+      signals: result.signals || [],
+      recommendations: result.recommendations || [],
+      source: result.source || 'local-gate',
+      timestamp: Date.now(),
+      backendOnline: result.source !== 'local-gate',
+      contextScan: true,
+      scannedText: text.slice(0, 200),
+    };
+
+    tabCache.set(tab.id, assessment);
+    await updateBadge(tab.id, assessment.trustScore);
+
+    // Push result to side panel
+    try {
+      await chrome.tabs.sendMessage(tab.id, { action: 'renderAssessment', assessment, settings });
+    } catch {}
+
+    // Open side panel to show result
+    await chrome.sidePanel.open({ tabId: tab.id });
+  }
+});
+
 // --- Message Handlers ---
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sender).then(sendResponse);
@@ -398,6 +500,22 @@ async function handleMessage(message, sender) {
         tabId = tab.id;
       }
       return tabCache.get(tabId) || null;
+    }
+
+    case 'scanText': {
+      // Scan arbitrary text (from WhatsApp observer, context menu, etc.)
+      const snapshot = {
+        url: message.url || '',
+        title: message.source || 'text-scan',
+        visibleText: message.text || '',
+        pageText: message.text || '',
+        signals: {},
+        messaging: { source: message.source || 'text', text: message.text, messageCount: 1 },
+      };
+      const result = await analyzeWithBackend(snapshot)
+        || await analyzeWithCloud(snapshot)
+        || localGateCheck(snapshot);
+      return result;
     }
 
     case 'factCheck': {
