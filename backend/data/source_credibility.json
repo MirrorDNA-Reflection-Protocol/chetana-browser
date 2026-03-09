@@ -1,0 +1,103 @@
+{
+  "trusted": {
+    "government": [
+      "pib.gov.in",
+      "rbi.org.in",
+      "cert-in.org.in",
+      "cybercrime.gov.in",
+      "uidai.gov.in",
+      "india.gov.in",
+      "incometax.gov.in",
+      "sebi.gov.in",
+      "irdai.gov.in",
+      "meity.gov.in",
+      "mha.gov.in",
+      "epfindia.gov.in",
+      "pmkisan.gov.in",
+      "gst.gov.in"
+    ],
+    "news_tier1": [
+      "reuters.com",
+      "apnews.com",
+      "bbc.com",
+      "bbc.co.uk",
+      "thehindu.com",
+      "indianexpress.com",
+      "ndtv.com",
+      "theguardian.com",
+      "nytimes.com",
+      "washingtonpost.com",
+      "economist.com",
+      "livemint.com",
+      "theprint.in",
+      "scroll.in",
+      "thewire.in"
+    ],
+    "financial": [
+      "npci.org.in",
+      "sebi.gov.in",
+      "irdai.gov.in",
+      "rbi.org.in",
+      "moneycontrol.com",
+      "economictimes.indiatimes.com",
+      "bseindia.com",
+      "nseindia.com"
+    ],
+    "tech": [
+      "arstechnica.com",
+      "techcrunch.com",
+      "wired.com",
+      "theverge.com"
+    ],
+    "fact_checking": [
+      "altnews.in",
+      "boomlive.in",
+      "factly.in",
+      "vishvasnews.com",
+      "thequint.com/news/webqoof",
+      "factcheck.afp.com",
+      "snopes.com",
+      "politifact.com"
+    ]
+  },
+  "caution": {
+    "aggregators": [
+      "news.google.com",
+      "flipboard.com",
+      "apple.news",
+      "inshorts.com"
+    ],
+    "social": [
+      "twitter.com",
+      "x.com",
+      "facebook.com",
+      "instagram.com",
+      "reddit.com",
+      "linkedin.com",
+      "threads.net"
+    ],
+    "tabloid": [
+      "dailymail.co.uk",
+      "nypost.com",
+      "thesun.co.uk",
+      "timesofindia.indiatimes.com",
+      "hindustantimes.com",
+      "deccanherald.com"
+    ]
+  },
+  "unreliable": {
+    "known_misinfo": [
+      "opindia.com",
+      "postcard.news",
+      "swarajya.com",
+      "tfipost.com",
+      "kreately.in",
+      "pgurus.com",
+      "newslaundry.com"
+    ],
+    "content_farms": [
+      "buzzfeed.com",
+      "scoopwhoop.com"
+    ]
+  }
+}

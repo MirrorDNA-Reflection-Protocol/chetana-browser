@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "description": "Known scam phone numbers reported by users and law enforcement",
+    "source": "Seed data — extend via community reports and Chakshu/TRAI feeds",
+    "updated": "2026-02-17"
+  },
+  "reported": [
+    {
+      "phone": "9876543210",
+      "reason": "Lottery/prize scam calls",
+      "reported_count": 234,
+      "first_seen": "2025-08-01"
+    },
+    {
+      "phone": "8888000111",
+      "reason": "Fake customer care — SBI impersonation",
+      "reported_count": 189,
+      "first_seen": "2025-07-15"
+    },
+    {
+      "phone": "7000123456",
+      "reason": "OLX advance payment scam",
+      "reported_count": 67,
+      "first_seen": "2025-10-10"
+    },
+    {
+      "phone": "6000999888",
+      "reason": "Electricity bill disconnection threat",
+      "reported_count": 145,
+      "first_seen": "2025-09-20"
+    },
+    {
+      "phone": "9111222333",
+      "reason": "Fake police/CBI calls demanding money",
+      "reported_count": 312,
+      "first_seen": "2025-06-01"
+    },
+    {
+      "phone": "8500100200",
+      "reason": "Job offer scam — registration fee",
+      "reported_count": 98,
+      "first_seen": "2025-11-05"
+    },
+    {
+      "phone": "7777888999",
+      "reason": "Investment/trading scam WhatsApp group",
+      "reported_count": 421,
+      "first_seen": "2025-05-12"
+    },
+    {
+      "phone": "9090909090",
+      "reason": "KYC update phishing calls",
+      "reported_count": 176,
+      "first_seen": "2025-08-22"
+    }
+  ]
+}

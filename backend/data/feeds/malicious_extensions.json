@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "source": "GitLab Security - Malicious Browser Extensions Feb 2025 (TamperedChef campaign)",
+    "url": "https://gitlab-com.gitlab.io/gl-security/security-tech-notes/threat-intelligence-tech-notes/malicious-browser-extensions-feb-2025/",
+    "fetched": "2026-03-08",
+    "description": "Known malicious Chrome extension IDs from the TamperedChef campaign affecting 3.2M+ users",
+    "total_affected_users": "3,200,000+"
+  },
+  "malicious_extensions": [
+    {
+      "name": "Nimble Capture",
+      "id": "bpconcjcammlapcogcnnelfmaeghhagj"
+    },
+    {
+      "name": "Wistia Video Downloader",
+      "id": "acbiaofoeebeinacmcknopaikmecdehl"
+    },
+    {
+      "name": "Super Dark Mode",
+      "id": "nlgphodeccebbcnkgmokeegopgpnjfkc"
+    },
+    {
+      "name": "Adblocker for Chrome - NoAds",
+      "id": "alplpnakfeabeiebipdmaenpmbgknjce"
+    },
+    {
+      "name": "Adblock for Chrome",
+      "id": "onomjaelhagjjojbkcafidnepbfkpnee"
+    },
+    {
+      "name": "KProxy",
+      "id": "idpbkophnbfijcnlffdmmppgnncgappc"
+    },
+    {
+      "name": "Emojis - Emoji Keyboard",
+      "id": "fedimamkpgiemhacbdhkkaihgofncola"
+    },
+    {
+      "name": "Chrome-Werbeblocker",
+      "id": "gdocgbfmddcfnlnpmnghmjicjognhonm"
+    },
+    {
+      "name": "Page Refresh",
+      "id": "hmooaemjmediafeacjplpbpenjnpcneg"
+    },
+    {
+      "name": "Picture in Picture",
+      "id": "giaoehhefkmchjbbdnahgeppblbdejmj"
+    },
+    {
+      "name": "WAToolkit",
+      "id": "jlhgcomgldfapimdboelilfcipigkgik"
+    },
+    {
+      "name": "Color Changer for YouTube",
+      "id": "jdjldbengpgdcfkljfdmakdgmfpneldd"
+    },
+    {
+      "name": "Video Effects for YouTube And Audio Enhancer",
+      "id": "deljjimclpnhngmikaiiodgggdniaooh"
+    },
+    {
+      "name": "Emoji Keyboard Emojis for Chrome",
+      "id": "fbcgkphadgmbalmlklhbdagcicajenei"
+    },
+    {
+      "name": "Adblock for You",
+      "id": "ogcaehilgakehloljjmajoempaflmdci"
+    },
+    {
+      "name": "Adblock Proxy",
+      "id": "gaoflciahikhligngeccdecgfjngejlh"
+    },
+    {
+      "name": "Mike Adblock f\u00fcr Chrome",
+      "id": "mdaboflcmhejfihjcbmdiebgfchigjcf"
+    }
+  ],
+  "indicators": {
+    "c2_patterns": [
+      "tamperedchef.com",
+      "extension-analytics.com"
+    ],
+    "capabilities": [
+      "keylogging",
+      "cookie_theft",
+      "credential_harvesting",
+      "search_hijacking",
+      "traffic_interception"
+    ],
+    "attack_vector": "compromised_developer_accounts"
+  }
+}

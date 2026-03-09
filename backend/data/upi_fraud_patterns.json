@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "version": 2,
+    "updated": "2026-02-17",
+    "note": "Fraudulent UPI IDs — migrated from v1 array format + lattice patterns. Crowdsourced reports extend this."
+  },
+  "patterns": [
+    {"contains": "paytmqr", "note": "Scammers often use paytmqr handles for fake QR codes"},
+    {"contains": "luckywin", "note": "Lottery/gambling scam UPI handles"},
+    {"contains": "cashprize", "note": "Fake prize/reward UPI handles"},
+    {"contains": "kycupdate", "note": "KYC fraud UPI handles"},
+    {"contains": "refund.", "note": "Fake refund UPI handles"},
+    {"contains": "helpdesk", "note": "Fake helpdesk UPI handles"},
+    {"contains": "loanapproved", "note": "Fake loan approval UPI handles"},
+    {"contains": "invest.profit", "note": "Investment scam UPI handles"},
+    {"contains": "job.offer", "note": "Fake job offer requiring registration fee"},
+    {"contains": "free.iphone", "note": "Fake giveaway scam handles"},
+    {"contains": "army.canteen", "note": "Army canteen discount scam handles"},
+    {"contains": "electricity.bill", "note": "Fake utility disconnection handles"}
+  ],
+  "suspicious_keywords": [
+    "refund", "kyc", "winner", "lottery", "prize", "customs", "clearance",
+    "verification", "update", "offer", "free", "lucky", "army", "canteen",
+    "job.offer", "hr.dept", "electricity", "bill.pay", "rbi", "sbi", "income.tax"
+  ],
+  "flagged": {
+    "fraud.refund@ybl": {"type": "refund_scam", "reports": 47, "first_seen": "2025-11-01"},
+    "kyc.update.sbi@oksbi": {"type": "kyc_fraud", "reports": 112, "first_seen": "2025-09-15"},
+    "lucky.winner2025@paytm": {"type": "lottery_scam", "reports": 83, "first_seen": "2025-10-22"},
+    "customs.clearance@ybl": {"type": "customs_scam", "reports": 29, "first_seen": "2025-12-05"},
+    "rbi.verification@axl": {"type": "bank_impersonation", "reports": 64, "first_seen": "2025-08-18"},
+    "olx.buyer.payment@ybl": {"type": "marketplace_scam", "reports": 156, "first_seen": "2025-07-10"},
+    "army.canteen.deal@paytm": {"type": "impersonation_scam", "reports": 38, "first_seen": "2025-11-20"},
+    "free.iphone.offer@ybl": {"type": "lottery_scam", "reports": 91, "first_seen": "2025-10-01"},
+    "electricity.bill.pay@oksbi": {"type": "utility_scam", "reports": 77, "first_seen": "2025-09-28"},
+    "job.offer.hr@ibl": {"type": "job_scam", "reports": 203, "first_seen": "2025-06-14"},
+    "scammer123@ybl": {"type": "lottery_scam", "reports": 34, "first_seen": "2025-03-10"},
+    "luckywin99@paytm": {"type": "lottery_scam", "reports": 28, "first_seen": "2025-04-15"},
+    "kychelp.sbi@ybl": {"type": "kyc_fraud", "reports": 45, "first_seen": "2025-02-20"},
+    "refund.process@axl": {"type": "refund_scam", "reports": 31, "first_seen": "2025-05-01"},
+    "cashprize.india@paytm": {"type": "lottery_scam", "reports": 22, "first_seen": "2025-06-12"},
+    "support.hdfc1@ybl": {"type": "bank_impersonation", "reports": 39, "first_seen": "2025-03-05"},
+    "loanapproved22@okaxis": {"type": "loan_scam", "reports": 19, "first_seen": "2025-07-20"},
+    "invest.profit99@ybl": {"type": "investment_scam", "reports": 36, "first_seen": "2025-04-08"},
+    "helpdesk.icici@paytm": {"type": "bank_impersonation", "reports": 42, "first_seen": "2025-02-15"},
+    "delivery.fee@ybl": {"type": "delivery_scam", "reports": 17, "first_seen": "2025-08-03"}
+  }
+}

@@ -1,0 +1,490 @@
+# Vajra Scam Patterns Database
+# Each pattern has: category, subcategory, patterns (regex), keywords, severity, description
+# Severity: low (1-30), medium (31-60), high (61-80), critical (81-100)
+
+categories:
+
+  # --- KYC / Identity Fraud ---
+  kyc_fraud:
+    severity: 85
+    description_en: "KYC verification fraud — impersonating banks or telecom to steal identity documents"
+    description_hi: "KYC सत्यापन धोखाधड़ी — पहचान दस्तावेज चुराने के लिए बैंक या टेलीकॉम का रूप धारण करना"
+    patterns:
+      - "(?i)kyc\\s*(update|verify|expire|pending|mandatory|suspend)"
+      - "(?i)your\\s+(account|sim|number)\\s+(will\\s+be\\s+)?(block|suspend|deactivat)"
+      - "(?i)(complete|update)\\s+kyc\\s+(immediately|urgently|now|today)"
+      - "(?i)aadhaar\\s*(link|verify|update|expired)"
+      - "(?i)pan\\s*card\\s*(link|update|verify|mandatory)"
+    keywords:
+      - "kyc update"
+      - "kyc verification"
+      - "account blocked"
+      - "sim block"
+      - "aadhaar link"
+      - "pan card update"
+    keywords_hi:
+      - "केवाईसी अपडेट"
+      - "खाता बंद"
+      - "आधार लिंक"
+      - "पैन कार्ड"
+      - "सिम ब्लॉक"
+
+  # --- Lottery / Prize Scam ---
+  lottery_scam:
+    severity: 90
+    description_en: "Fake lottery or prize notification — you didn't enter any contest"
+    description_hi: "नकली लॉटरी या इनाम सूचना — आपने किसी प्रतियोगिता में भाग नहीं लिया"
+    patterns:
+      - "(?i)(congratulat|you\\s+(have\\s+)?won|winner|selected|lucky\\s+draw)"
+      - "(?i)(prize|reward|lottery|jackpot|cash\\s+prize)\\s*(of|worth|amount)?\\s*₹?\\s*\\d"
+      - "(?i)(claim|collect|redeem)\\s+(your\\s+)?(prize|reward|winning|amount)"
+      - "(?i)whatsapp\\s+(lucky|prize|lottery)"
+      - "(?i)kaun\\s+banega\\s+crorepati\\s*(winner|prize|lottery)"
+    keywords:
+      - "congratulations"
+      - "you have won"
+      - "lucky draw"
+      - "prize money"
+      - "claim your prize"
+      - "lottery winner"
+    keywords_hi:
+      - "बधाई हो"
+      - "आपने जीता"
+      - "लॉटरी"
+      - "इनाम"
+      - "लकी ड्रा"
+
+  # --- Job Offer Scam ---
+  job_scam:
+    severity: 75
+    description_en: "Fake job offers — work from home scams, registration fees, too-good salary"
+    description_hi: "नकली नौकरी — घर बैठे काम, रजिस्ट्रेशन फीस, बहुत ज्यादा सैलरी"
+    patterns:
+      - "(?i)(work\\s+from\\s+home|part\\s*time\\s+job|earn\\s+from\\s+home)"
+      - "(?i)(earn|income|salary)\\s*(of|upto|up\\s+to)?\\s*₹?\\s*\\d+.*\\s*(per\\s+day|daily|per\\s+hour|hourly|monthly)"
+      - "(?i)(registration|joining)\\s+(fee|charge|amount)\\s*(of)?\\s*₹?\\s*\\d"
+      - "(?i)no\\s+(experience|qualification|interview)\\s+(required|needed)"
+      - "(?i)(amazon|flipkart|meesho)\\s*(review|rating|product)\\s*(job|work|task)"
+      - "(?i)data\\s*entry\\s*job.*₹"
+      - "(?i)(typing|copy\\s*paste)\\s*job.*\\s*(earn|income|₹)"
+    keywords:
+      - "work from home"
+      - "earn daily"
+      - "registration fee"
+      - "part time job"
+      - "no experience needed"
+      - "online job"
+    keywords_hi:
+      - "घर बैठे कमाई"
+      - "पार्ट टाइम"
+      - "रजिस्ट्रेशन फीस"
+      - "ऑनलाइन काम"
+      - "रोजाना कमाई"
+
+  # --- OTP Theft ---
+  otp_theft:
+    severity: 95
+    description_en: "OTP theft — someone trying to get your one-time password to access your accounts"
+    description_hi: "OTP चोरी — कोई आपका वन-टाइम पासवर्ड लेकर आपके अकाउंट में घुसने की कोशिश कर रहा है"
+    patterns:
+      - "(?i)(share|send|tell|give|forward)\\s*(me\\s+)?(your\\s+)?(otp|one\\s*time\\s*password|verification\\s*code)"
+      - "(?i)otp\\s*(is|has\\s+been)?\\s*(sent|generated|received)"
+      - "(?i)(wrong|incorrect)\\s*otp\\s*(sent|entered|received).*\\s*(resend|share|forward)"
+      - "(?i)do\\s+not\\s+share\\s+otp"
+      - "(?i)(accidentally|by\\s+mistake)\\s+sent\\s+(otp|code)"
+    keywords:
+      - "share otp"
+      - "send otp"
+      - "verification code"
+      - "one time password"
+      - "otp sent"
+    keywords_hi:
+      - "ओटीपी भेजो"
+      - "ओटीपी शेयर"
+      - "वेरिफिकेशन कोड"
+      - "ओटीपी बताओ"
+
+  # --- Loan Pre-approval ---
+  loan_scam:
+    severity: 70
+    description_en: "Fake pre-approved loans — upfront processing fees, too-easy approval"
+    description_hi: "नकली लोन ऑफर — पहले प्रोसेसिंग फीस, बहुत आसान अप्रूवल"
+    patterns:
+      - "(?i)(pre-?approved|instant|guaranteed)\\s*(personal\\s+)?loan"
+      - "(?i)loan\\s*(of|upto|amount)?\\s*₹?\\s*\\d+.*\\s*(lakh|crore|lac)"
+      - "(?i)(processing|documentation)\\s+(fee|charge).*\\s*₹?\\s*\\d"
+      - "(?i)no\\s+(cibil|credit)\\s*(score|check|required)"
+      - "(?i)(mudra|pmay|government)\\s*loan.*\\s*(apply|approved|sanction)"
+      - "(?i)loan\\s+app.*(download|install|click)"
+    keywords:
+      - "pre-approved loan"
+      - "instant loan"
+      - "processing fee"
+      - "no cibil"
+      - "loan approved"
+    keywords_hi:
+      - "लोन अप्रूव"
+      - "प्रोसेसिंग फीस"
+      - "तुरंत लोन"
+      - "बिना सिबिल"
+      - "मुद्रा लोन"
+
+  # --- Investment / Trading Scam ---
+  investment_scam:
+    severity: 80
+    description_en: "Fake investment schemes — crypto, forex, stock tips with guaranteed returns"
+    description_hi: "नकली निवेश योजना — क्रिप्टो, फॉरेक्स, गारंटीड रिटर्न वाले स्टॉक टिप्स"
+    patterns:
+      - "(?i)(guaranteed|assured|fixed)\\s+(return|profit|income)\\s*(of)?\\s*\\d"
+      - "(?i)(double|triple)\\s+your\\s+(money|investment)\\s*(in)?\\s*\\d+\\s*(day|week|month)"
+      - "(?i)(invest|deposit)\\s*₹?\\s*\\d+.*\\s*(get|earn|receive)\\s*₹?\\s*\\d+"
+      - "(?i)(crypto|bitcoin|forex|trading)\\s*(signal|tip|group|channel)"
+      - "(?i)(stock|share)\\s*(tip|recommendation|advisory).*\\s*(guaranteed|100%|profit)"
+      - "(?i)(whatsapp|telegram)\\s*(trading|investment|stock)\\s*(group|channel)"
+      - "(?i)(ponzi|mlm|chain|referral)\\s*(scheme|program|income)"
+    keywords:
+      - "guaranteed returns"
+      - "double your money"
+      - "invest now"
+      - "trading group"
+      - "stock tips"
+      - "crypto profit"
+    keywords_hi:
+      - "गारंटीड रिटर्न"
+      - "पैसा डबल"
+      - "निवेश करें"
+      - "ट्रेडिंग ग्रुप"
+      - "शेयर टिप्स"
+
+  # --- Delivery / Courier Scam ---
+  delivery_scam:
+    severity: 65
+    description_en: "Fake delivery notifications — customs charges, redelivery fees"
+    description_hi: "नकली डिलीवरी सूचना — कस्टम चार्ज, री-डिलीवरी फीस"
+    patterns:
+      - "(?i)(parcel|package|courier|shipment)\\s*(held|stuck|pending|failed|returned)"
+      - "(?i)(customs|delivery|redelivery)\\s*(fee|charge|duty|clearance)\\s*(of)?\\s*₹?\\s*\\d"
+      - "(?i)(india\\s*post|delhivery|bluedart|dtdc|ecom\\s*express).*\\s*(failed|pending|pay)"
+      - "(?i)(track|reschedule|confirm)\\s*(your\\s+)?(delivery|parcel|package).*\\s*(link|click|url)"
+      - "(?i)address\\s*(confirm|update|verify).*\\s*(delivery|parcel)"
+    keywords:
+      - "parcel pending"
+      - "customs duty"
+      - "delivery failed"
+      - "courier held"
+      - "pay to release"
+    keywords_hi:
+      - "पार्सल रुका हुआ"
+      - "कस्टम चार्ज"
+      - "डिलीवरी फेल"
+      - "कूरियर"
+
+  # --- Tech Support Scam ---
+  tech_support_scam:
+    severity: 70
+    description_en: "Fake tech support — virus alerts, remote access, Microsoft/Apple impersonation"
+    description_hi: "नकली टेक सपोर्ट — वायरस अलर्ट, रिमोट एक्सेस, माइक्रोसॉफ्ट/एप्पल का बहाना"
+    patterns:
+      - "(?i)(virus|malware|trojan|hacked)\\s*(detected|found|alert|warning)"
+      - "(?i)(download|install)\\s*(anydesk|teamviewer|quicksupport|remote)"
+      - "(?i)(microsoft|apple|google|jio)\\s*(support|helpdesk|helpline|customer\\s*care)"
+      - "(?i)(call|dial|contact)\\s*(this\\s+)?\\s*(number|helpline)\\s*:?\\s*[+]?\\d"
+      - "(?i)your\\s+(computer|phone|device)\\s*(is|has\\s+been)\\s*(compromised|hacked|infected)"
+    keywords:
+      - "virus detected"
+      - "install anydesk"
+      - "remote access"
+      - "customer care number"
+      - "computer hacked"
+    keywords_hi:
+      - "वायरस मिला"
+      - "रिमोट एक्सेस"
+      - "कस्टमर केयर"
+      - "हैक हो गया"
+
+  # --- Aadhaar Scam ---
+  aadhaar_scam:
+    severity: 90
+    description_en: "Aadhaar identity theft — linking requests, biometric fraud, UIDAI impersonation"
+    description_hi: "आधार पहचान चोरी — लिंकिंग, बायोमेट्रिक धोखाधड़ी, UIDAI का बहाना"
+    patterns:
+      - "(?i)aadhaar\\s*(number|card|id)\\s*(cancel|deactivat|suspend|block)"
+      - "(?i)uidai\\s*(notice|warning|alert|verification)"
+      - "(?i)(link|update|verify)\\s*(your\\s+)?aadhaar.*\\s*(immediately|urgently|before)"
+      - "(?i)aadhaar\\s*(biometric|fingerprint|iris)\\s*(update|lock|unlock)"
+      - "(?i)aadhaar\\s*(misuse|fraud|used\\s+by|illegal)"
+      - "(?i)(e-?aadhaar|maadhaar)\\s*(download|update|app).*\\s*(link|click)"
+    keywords:
+      - "aadhaar deactivated"
+      - "uidai notice"
+      - "aadhaar misuse"
+      - "biometric update"
+      - "aadhaar link"
+    keywords_hi:
+      - "आधार बंद"
+      - "आधार कैंसिल"
+      - "आधार का गलत इस्तेमाल"
+      - "बायोमेट्रिक"
+      - "यूआईडीएआई"
+
+  # --- UPI Fraud ---
+  upi_fraud:
+    severity: 90
+    description_en: "UPI payment fraud — collect requests, fake payment screenshots, QR scams"
+    description_hi: "UPI भुगतान धोखाधड़ी — कलेक्ट रिक्वेस्ट, फेक पेमेंट स्क्रीनशॉट, QR स्कैम"
+    patterns:
+      - "(?i)(accept|approve)\\s*(this\\s+)?(upi|collect|payment)\\s*(request|transaction)"
+      - "(?i)(send|pay|transfer)\\s*₹?\\s*\\d+.*\\s*(to\\s+receive|to\\s+get|for\\s+refund)"
+      - "(?i)(gpay|phonepe|paytm|bhim|upi).*\\s*(collect|request|accept|approve)"
+      - "(?i)(scan|click)\\s*(this\\s+)?(qr|code|link).*\\s*(receive|get|credit|payment)"
+      - "(?i)(upi\\s*pin|mpin)\\s*(enter|share|tell|give)"
+      - "(?i)(refund|cashback).*\\s*(upi|gpay|phonepe|paytm).*\\s*(accept|approve|enter\\s*pin)"
+      - "(?i)(payment|amount)\\s*(failed|pending).*\\s*(retry|resend|pay\\s*again)"
+    keywords:
+      - "collect request"
+      - "scan to receive"
+      - "upi pin"
+      - "payment failed retry"
+      - "accept payment"
+      - "qr code receive"
+    keywords_hi:
+      - "कलेक्ट रिक्वेस्ट"
+      - "स्कैन करो पैसे पाने के लिए"
+      - "यूपीआई पिन"
+      - "पेमेंट फेल"
+      - "क्यूआर कोड"
+
+  # --- Bank Impersonation ---
+  bank_impersonation:
+    severity: 85
+    description_en: "Fake bank communication — SBI, HDFC, ICICI, PNB impersonation"
+    description_hi: "नकली बैंक संदेश — SBI, HDFC, ICICI, PNB का बहाना"
+    patterns:
+      - "(?i)(sbi|hdfc|icici|axis|pnb|bob|kotak|canara|union|bandhan|yes\\s*bank|idbi).*\\s*(block|suspend|deactivat|freez|alert|urgent|verify|update|click|link)"
+      - "(?i)(dear\\s+customer|valued\\s+customer).*\\s*(bank|account)"
+      - "(?i)(credit|debit)\\s*card.*\\s*(block|suspend|expire|upgrade)"
+      - "(?i)(net\\s*banking|mobile\\s*banking|internet\\s*banking).*\\s*(suspend|block|update|verify)"
+      - "(?i)(account|card).*\\s*(will\\s+be|has\\s+been)\\s*(block|suspend|deactivat|freez)"
+      - "(?i)(reward|bonus)\\s*(points?|₹).*\\s*(redeem|expire|credit)"
+      - "(?i)(ifsc|branch|account\\s*number|cvv|card\\s*number|expiry)\\s*(update|verify|share|send)"
+    keywords:
+      - "dear customer"
+      - "account blocked"
+      - "card suspended"
+      - "net banking"
+      - "reward points"
+      - "verify account"
+    keywords_hi:
+      - "प्रिय ग्राहक"
+      - "खाता बंद"
+      - "कार्ड ब्लॉक"
+      - "नेट बैंकिंग"
+      - "रिवार्ड पॉइंट"
+
+  # --- Electricity / Utility Disconnection ---
+  utility_scam:
+    severity: 75
+    description_en: "Fake electricity/utility disconnection threats — pay immediately or get cut off"
+    description_hi: "नकली बिजली कटने की धमकी — तुरंत भुगतान करो वरना कनेक्शन काटेंगे"
+    patterns:
+      - "(?i)(electricity|bijli|power)\\s*(connection|supply|meter).*\\s*(disconnect|cut|terminate)"
+      - "(?i)(bill|payment)\\s*(overdue|pending|unpaid).*\\s*(disconnect|cut|terminate)"
+      - "(?i)(bses|tata\\s*power|adani|msedcl|uppcl|discom).*\\s*(disconnect|due|pending)"
+      - "(?i)(gas|water|electricity)\\s*(connection|supply).*\\s*(tonight|today|within\\s*\\d+\\s*hour)"
+      - "(?i)pay.*\\s*₹?\\s*\\d+.*\\s*(avoid|prevent)\\s*(disconnection|cut)"
+      - "(?i)(last\\s+chance|final\\s+notice|final\\s+warning).*\\s*(electricity|bill|payment)"
+    keywords:
+      - "electricity disconnect"
+      - "bill overdue"
+      - "connection cut"
+      - "pay immediately"
+      - "final notice"
+    keywords_hi:
+      - "बिजली कनेक्शन काटा जाएगा"
+      - "बिल बकाया"
+      - "अंतिम सूचना"
+      - "तुरंत भुगतान"
+      - "बिजली कटेगी"
+
+  # --- Government Scheme Fraud ---
+  govt_scheme_fraud:
+    severity: 70
+    description_en: "Fake government scheme notifications — PM-KISAN, Ayushman Bharat, free ration"
+    description_hi: "नकली सरकारी योजना — पीएम किसान, आयुष्मान भारत, मुफ्त राशन"
+    patterns:
+      - "(?i)(pm-?kisan|pmkisan|pm\\s+kisan).*\\s*(₹|amount|installment|rejected|verify)"
+      - "(?i)(ayushman|jan\\s*arogya|health\\s*card).*\\s*(apply|download|activate|click)"
+      - "(?i)(free\\s+ration|ration\\s+card).*\\s*(apply|register|update|link)"
+      - "(?i)(government|sarkari|modi)\\s*(scheme|yojana).*\\s*(register|apply|₹)"
+      - "(?i)(subsidy|bhatta|pension).*\\s*(apply|register|₹|amount).*\\s*(click|link|app)"
+    keywords:
+      - "pm kisan"
+      - "free ration"
+      - "government scheme"
+      - "ayushman bharat"
+      - "subsidy apply"
+    keywords_hi:
+      - "पीएम किसान"
+      - "मुफ्त राशन"
+      - "सरकारी योजना"
+      - "आयुष्मान भारत"
+      - "सब्सिडी"
+
+  # --- Sextortion / Blackmail ---
+  sextortion:
+    severity: 85
+    description_en: "Sextortion and video call blackmail — threats to share compromising content"
+    description_hi: "सेक्सटॉर्शन और वीडियो कॉल ब्लैकमेल — आपत्तिजनक सामग्री शेयर करने की धमकी"
+    patterns:
+      - "(?i)(video|photo|image|recording).*\\s*(share|send|post|upload|viral).*\\s*(contact|family|friends)"
+      - "(?i)(pay|transfer|send)\\s*₹?\\s*\\d+.*\\s*(delete|remove|not\\s+share|not\\s+post)"
+      - "(?i)(compromising|private|intimate|nude)\\s*(video|photo|image|content)"
+      - "(?i)(blackmail|extort|threat)"
+      - "(?i)(video\\s*call).*\\s*(record|screenshot|capture)"
+    keywords:
+      - "video viral"
+      - "pay to delete"
+      - "blackmail"
+      - "private video"
+      - "will share with contacts"
+    keywords_hi:
+      - "वीडियो वायरल"
+      - "ब्लैकमेल"
+      - "पैसे दो वरना"
+      - "प्राइवेट वीडियो"
+
+  # --- Insurance Fraud ---
+  insurance_fraud:
+    severity: 65
+    description_en: "Fake insurance — policy expiry, bonus, maturity amount claims"
+    description_hi: "नकली बीमा — पॉलिसी एक्सपायरी, बोनस, मैच्योरिटी अमाउंट"
+    patterns:
+      - "(?i)(lic|insurance)\\s*(policy|premium|bonus|maturity).*\\s*(expire|lapse|amount|₹)"
+      - "(?i)(unclaimed|pending|maturity)\\s*(insurance|lic|policy)\\s*(amount|bonus|₹)"
+      - "(?i)(health|life|vehicle)\\s*insurance.*\\s*(free|₹\\s*1|cheap|offer)"
+    keywords:
+      - "lic bonus"
+      - "policy maturity"
+      - "unclaimed insurance"
+      - "free insurance"
+    keywords_hi:
+      - "एलआईसी बोनस"
+      - "पॉलिसी मैच्योरिटी"
+      - "बीमा"
+
+# --- Suspicious URL TLDs ---
+suspicious_tlds:
+  - ".xyz"
+  - ".top"
+  - ".click"
+  - ".loan"
+  - ".win"
+  - ".gq"
+  - ".cf"
+  - ".tk"
+  - ".ml"
+  - ".ga"
+  - ".buzz"
+  - ".icu"
+  - ".cam"
+  - ".work"
+  - ".life"
+  - ".site"
+  - ".online"
+  - ".club"
+  - ".fun"
+  - ".rest"
+  - ".monster"
+
+# Known legitimate Indian domains (should NOT flag these alone)
+trusted_domains:
+  - "sbi.co.in"
+  - "onlinesbi.sbi"
+  - "hdfcbank.com"
+  - "icicibank.com"
+  - "axisbank.com"
+  - "kotak.com"
+  - "npci.org.in"
+  - "uidai.gov.in"
+  - "aadhaar.gov.in"
+  - "india.gov.in"
+  - "incometax.gov.in"
+  - "epfindia.gov.in"
+  - "pmkisan.gov.in"
+  - "irctc.co.in"
+  - "indiapost.gov.in"
+  - "paytm.com"
+  - "phonepe.com"
+  - "gpay.app"
+
+# --- Urgency Markers ---
+urgency_markers:
+  en:
+    - "immediately"
+    - "urgent"
+    - "urgently"
+    - "within 24 hours"
+    - "within 2 hours"
+    - "expire today"
+    - "last chance"
+    - "final notice"
+    - "final warning"
+    - "act now"
+    - "do it now"
+    - "right now"
+    - "don't delay"
+    - "time sensitive"
+    - "deadline"
+    - "today only"
+    - "hurry"
+    - "limited time"
+    - "before midnight"
+    - "asap"
+  hi:
+    - "तुरंत"
+    - "अभी"
+    - "जल्दी"
+    - "आज ही"
+    - "24 घंटे में"
+    - "2 घंटे के अंदर"
+    - "अंतिम सूचना"
+    - "अंतिम चेतावनी"
+    - "आखिरी मौका"
+    - "देर मत करो"
+    - "जल्दी करो"
+    - "समय सीमित है"
+    - "आज ही करें"
+    - "फौरन"
+    - "तत्काल"
+
+# --- Impersonation Signals ---
+impersonation_signals:
+  - "(?i)(rbi|reserve\\s*bank|sebi)\\s*(notice|order|directive|warning)"
+  - "(?i)(police|cyber\\s*cell|cbi|ed|enforcement)\\s*(notice|case|complaint|arrest)"
+  - "(?i)(court|tribunal|legal)\\s*(notice|order|summon|warrant)"
+  - "(?i)(customs|income\\s*tax|gst)\\s*(notice|penalty|seizure|raid)"
+  - "(?i)(narcotics|ncb|drugs).*\\s*(parcel|courier|package|found)"
+
+# --- Threat multipliers ---
+# These increase the threat score when found alongside scam patterns
+threat_multipliers:
+  phone_numbers:
+    pattern: "(?:\\+91|0)?[6-9]\\d{9}"
+    multiplier: 1.1
+    reason: "Contains Indian phone number"
+  money_amounts:
+    pattern: "₹\\s*[\\d,]+(?:\\.\\d{2})?|(?:Rs\\.?|INR)\\s*[\\d,]+"
+    multiplier: 1.15
+    reason: "Mentions specific money amount"
+  short_urls:
+    pattern: "(?:bit\\.ly|tinyurl|goo\\.gl|t\\.co|is\\.gd|cutt\\.ly|shorturl)/"
+    multiplier: 1.2
+    reason: "Contains shortened URL (hiding destination)"
+  action_urls:
+    pattern: "(?:click|tap|open|visit)\\s+(?:here|this|the)\\s+(?:link|url|button)"
+    multiplier: 1.15
+    reason: "Pushes user to click a link"
+  deadline_pressure:
+    pattern: "(?i)(?:within|before|by)\\s+\\d+\\s*(?:hour|minute|hr|min)"
+    multiplier: 1.25
+    reason: "Creates artificial time pressure"

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chetana Settings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 32px;
+    }
+    .container {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #f1f5f9;
+    }
+    .subtitle {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+    .setting-group {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .setting-group h2 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #0f172a;
+    }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-label {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .setting-desc {
+      font-size: 11px;
+      color: #475569;
+      margin-top: 2px;
+    }
+    input[type="text"] {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    select {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    select:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    /* Toggle Switch */
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #334155;
+      border-radius: 22px;
+      transition: background 0.3s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 3px;
+      bottom: 3px;
+      background: #e2e8f0;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    .toggle input:checked + .toggle-slider {
+      background: #3b82f6;
+    }
+    .toggle input:checked + .toggle-slider::before {
+      transform: translateX(18px);
+    }
+    .btn-danger {
+      background: #ef444422;
+      color: #ef4444;
+      border: 1px solid #ef444444;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-danger:hover {
+      background: #ef444444;
+    }
+    .btn-save {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .btn-save:hover { background: #2563eb; }
+    .save-status {
+      color: #22c55e;
+      font-size: 12px;
+      margin-left: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .save-status.visible { opacity: 1; }
+    .footer {
+      margin-top: 24px;
+      text-align: center;
+      color: #334155;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chetana Settings</h1>
+    <p class="subtitle">Trust by Design — v6.0.0</p>
+
+    <div class="setting-group">
+      <h2>Connection</h2>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Backend URL</div>
+          <div class="setting-desc">Analysis server address</div>
+        </div>
+        <input type="text" id="backendUrl" value="http://127.0.0.1:8799">
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <h2>Behavior</h2>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Auto-scan pages</div>
+          <div class="setting-desc">Analyze pages on load</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="autoScan" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Submit guard</div>
+          <div class="setting-desc">Block form submission on DANGER pages</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="submitGuard" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Link hover tooltips</div>
+          <div class="setting-desc">Show domain on external links</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="linkHoverTooltips" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <h2>Display</h2>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Overlay position</div>
+        </div>
+        <select id="overlayPosition">
+          <option value="bottom-right">Bottom Right</option>
+          <option value="bottom-left">Bottom Left</option>
+          <option value="top-right">Top Right</option>
+        </select>
+      </div>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Auto-hide delay</div>
+        </div>
+        <select id="overlayAutoHide">
+          <option value="5000">5 seconds</option>
+          <option value="10000" selected>10 seconds</option>
+          <option value="0">Never</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <h2>Data</h2>
+      <div class="setting-row">
+        <div>
+          <div class="setting-label">Scan history</div>
+          <div class="setting-desc">Clear all stored scan results</div>
+        </div>
+        <button class="btn-danger" id="clearHistory">Clear History</button>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center;">
+      <button class="btn-save" id="saveBtn">Save Settings</button>
+      <span class="save-status" id="saveStatus">Saved</span>
+    </div>
+
+    <p class="footer">Chetana Browser v6.0.0 — Trust by Design</p>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

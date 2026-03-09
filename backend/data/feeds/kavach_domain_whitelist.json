@@ -1,0 +1,34 @@
+{
+  "gov": [
+    "gov.in",
+    "nic.in",
+    "uidai.gov.in",
+    "incometax.gov.in",
+    "passportindia.gov.in",
+    "gst.gov.in",
+    "cybercrime.gov.in",
+    "digilocker.gov.in",
+    "india.gov.in",
+    "pmkisan.gov.in",
+    "epfindia.gov.in"
+  ],
+  "banking": [
+    "onlinesbi.sbi",
+    "sbi.co.in",
+    "hdfcbank.com",
+    "icicibank.com",
+    "axisbank.com",
+    "kotak.com",
+    "bankofbaroda.in",
+    "pnbindia.in",
+    "canarabank.com",
+    "unionbankofindia.co.in"
+  ],
+  "payments": [
+    "npci.org.in",
+    "bhimupi.org.in",
+    "phonepe.com",
+    "paytm.com",
+    "gpay.app"
+  ]
+}

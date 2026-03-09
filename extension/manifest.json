@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Chetana Browser — Trust by Design",
+  "version": "6.1.0",
+  "description": "Every page gets a trust score. Scam detection, WhatsApp scam catching, news fact-checking, and manipulation detection — passive, built-in, trust-first.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "sidePanel",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8799/*",
+    "https://web.whatsapp.com/*",
+    "https://web.telegram.org/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content_script.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel/panel.html"
+  },
+  "options_page": "options/options.html",
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Chetana — Trust by Design"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
