@@ -1,50 +1,50 @@
 {
-  "last_refresh": "2026-03-09 16:34:26 UTC",
+  "last_refresh": "2026-03-10 04:35:16 UTC",
   "results": [
     {
       "filename": "urlhaus_recent.json",
       "description": "URLhaus recent malware URLs (abuse.ch)",
       "url": "https://urlhaus.abuse.ch/downloads/json_recent/",
       "status": "ok",
-      "size_bytes": 10010705,
-      "size_human": "9.5 MB",
-      "elapsed_s": 1.91
+      "size_bytes": 9714618,
+      "size_human": "9.3 MB",
+      "elapsed_s": 0.83
     },
     {
       "filename": "phishtank.json",
       "description": "PhishTank verified online phishing URLs",
       "url": "http://data.phishtank.com/data/online-valid.json",
-      "status": "ok",
-      "size_bytes": 32535828,
-      "size_human": "31.0 MB",
-      "elapsed_s": 6.57
+      "status": "http_error_404",
+      "size_bytes": 0,
+      "size_human": "",
+      "elapsed_s": 1.25
     },
     {
       "filename": "openphish.txt",
       "description": "OpenPhish community phishing feed",
       "url": "https://openphish.com/feed.txt",
       "status": "ok",
-      "size_bytes": 19717,
-      "size_human": "19.3 KB",
-      "elapsed_s": 1.09
+      "size_bytes": 17690,
+      "size_human": "17.3 KB",
+      "elapsed_s": 0.79
     },
     {
       "filename": "feodo_blocklist.json",
       "description": "Feodo Tracker botnet C2 IP blocklist (abuse.ch)",
       "url": "https://feodotracker.abuse.ch/downloads/ipblocklist.json",
       "status": "ok",
-      "size_bytes": 1764,
+      "size_bytes": 1763,
       "size_human": "1.7 KB",
-      "elapsed_s": 0.24
+      "elapsed_s": 0.21
     },
     {
       "filename": "threatfox_hostfile.txt",
       "description": "ThreatFox IOC hostfile (abuse.ch)",
       "url": "https://threatfox.abuse.ch/downloads/hostfile/",
       "status": "ok",
-      "size_bytes": 1766389,
+      "size_bytes": 1769324,
       "size_human": "1.7 MB",
-      "elapsed_s": 0.5
+      "elapsed_s": 0.18
     },
     {
       "filename": "blocklistproject_malware.txt",
@@ -53,7 +53,7 @@
       "status": "ok",
       "size_bytes": 12905685,
       "size_human": "12.3 MB",
-      "elapsed_s": 3.5
+      "elapsed_s": 1.35
     },
     {
       "filename": "blocklistproject_phishing.txt",
@@ -62,7 +62,7 @@
       "status": "ok",
       "size_bytes": 5686524,
       "size_human": "5.4 MB",
-      "elapsed_s": 1.26
+      "elapsed_s": 0.71
     },
     {
       "filename": "blocklistproject_scam.txt",
@@ -71,16 +71,16 @@
       "status": "ok",
       "size_bytes": 34354,
       "size_human": "33.5 KB",
-      "elapsed_s": 0.34
+      "elapsed_s": 0.31
     },
     {
       "filename": "hagezi_tif_domains.txt",
       "description": "HaGeZi Threat Intelligence Feeds DNS blocklist",
       "url": "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/tif.txt",
       "status": "ok",
-      "size_bytes": 12342900,
-      "size_human": "11.8 MB",
-      "elapsed_s": 2.05
+      "size_bytes": 12087575,
+      "size_human": "11.5 MB",
+      "elapsed_s": 0.61
     },
     {
       "filename": "scam_blocklist_domains.txt",
@@ -89,13 +89,13 @@
       "status": "ok",
       "size_bytes": 11354007,
       "size_human": "10.8 MB",
-      "elapsed_s": 2.38
+      "elapsed_s": 1.5
     }
   ],
   "summary": {
-    "ok": 10,
+    "ok": 9,
     "skipped": 0,
-    "failed": 0,
-    "total_bytes": 86657873
+    "failed": 1,
+    "total_bytes": 53571540
   }
 }
