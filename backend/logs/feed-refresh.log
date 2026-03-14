@@ -416,3 +416,22 @@
 2026-03-14 10:10:33  chetana.feed_refresh  INFO  Done: 9 ok, 0 skipped, 1 failed | Total downloaded: 53.4 MB
 2026-03-14 10:10:33  chetana.feed_refresh  INFO  ------------------------------------------------------------
 2026-03-14 10:10:33  chetana.feed_refresh  INFO  Manifest written to /Users/mirror-admin/repos/chetana-browser/backend/data/feeds/_refresh_manifest.json
+2026-03-14 20:48:46  chetana.feed_refresh  INFO  ============================================================
+2026-03-14 20:48:46  chetana.feed_refresh  INFO  Chetana feed refresh started at 2026-03-14 15:18:46 UTC
+2026-03-14 20:48:46  chetana.feed_refresh  INFO  Feeds directory: /Users/mirror-admin/repos/chetana-browser/backend/data/feeds
+2026-03-14 20:48:46  chetana.feed_refresh  INFO  Max file size: 50.0 MB
+2026-03-14 20:48:46  chetana.feed_refresh  INFO  ============================================================
+2026-03-14 20:48:48  chetana.feed_refresh  INFO  OK   urlhaus_recent.json                         9.6 MB  1.5s
+2026-03-14 20:48:56  chetana.feed_refresh  INFO  OK   phishtank.json                             31.2 MB  7.9s
+2026-03-14 20:48:58  chetana.feed_refresh  INFO  OK   openphish.txt                              18.0 KB  1.1s
+2026-03-14 20:48:59  chetana.feed_refresh  INFO  OK   feodo_blocklist.json                        1.7 KB  0.3s
+2026-03-14 20:49:00  chetana.feed_refresh  INFO  OK   threatfox_hostfile.txt                      1.7 MB  0.5s
+2026-03-14 20:49:04  chetana.feed_refresh  INFO  OK   blocklistproject_malware.txt               12.3 MB  3.8s
+2026-03-14 20:49:07  chetana.feed_refresh  INFO  OK   blocklistproject_phishing.txt               5.4 MB  1.9s
+2026-03-14 20:49:08  chetana.feed_refresh  INFO  OK   blocklistproject_scam.txt                  33.5 KB  0.3s
+2026-03-14 20:49:11  chetana.feed_refresh  INFO  OK   hagezi_tif_domains.txt                     13.6 MB  2.9s
+2026-03-14 20:49:15  chetana.feed_refresh  INFO  OK   scam_blocklist_domains.txt                 10.8 MB  3.1s
+2026-03-14 20:49:16  chetana.feed_refresh  INFO  ------------------------------------------------------------
+2026-03-14 20:49:16  chetana.feed_refresh  INFO  Done: 10 ok, 0 skipped, 0 failed | Total downloaded: 84.6 MB
+2026-03-14 20:49:16  chetana.feed_refresh  INFO  ------------------------------------------------------------
+2026-03-14 20:49:16  chetana.feed_refresh  INFO  Manifest written to /Users/mirror-admin/repos/chetana-browser/backend/data/feeds/_refresh_manifest.json
